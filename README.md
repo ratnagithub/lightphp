@@ -1,2 +1,2 @@
 # lightphp
-A ultra light PHP framework for creating API
+LightPHP is a light PHP micro framework that helps you quickly write simple yet powerful APIs

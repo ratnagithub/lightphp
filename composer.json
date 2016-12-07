@@ -1,0 +1,39 @@
+{
+  "name": "ratnadeep/LightPHP",
+  "type": "PHP Framework",
+  "description": "LightPHP is a light PHP micro framework that helps you quickly write simple yet powerful APIs",
+  "keywords": ["framework","micro","api","router"],
+  "homepage": "http://profcart.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ratnadeep Deb",
+      "email": "debratnadeep84@gmail.com",
+      "homepage": "https://github.com/ratnagithub"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "zendframework/zend-diactoros": "1.3.*",
+    "symfony/yaml": "3.*",
+    "level-2/dice": "^2.0",
+    "jan-swiecki/simple-annotations": "0.3.1",
+    "bshaffer/oauth2-server-php": "1.8.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "LightPHP\\": "src"
+    }
+  },
+  "scripts": {
+    "test": [
+      "@phpunit",
+      "@phpcs"
+    ],
+    "phpunit": "php vendor/bin/phpunit",
+    "phpcs": "php vendor/bin/phpcs"
+  }
+}
