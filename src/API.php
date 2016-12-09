@@ -23,11 +23,16 @@ class API
     
     public function __construct()
     {
-        $this->request = (new RequestFactory())->getRequest();
+        $this->request = RequestFactory::getRequest();
         $this->response = new Response();
         $this->errorHandler = new ErrorHandler();
     }
-
+    public function getRequest(){
+        return $this->request;
+    }
+    public function getResponse(){
+        return $this->response;
+    }
     public function run()
     {
         try {
