@@ -22,15 +22,27 @@ use OAuth2\Storage\UserCredentialsInterface;
 
 class Container
 {
-    private $services;
-
-
+    /**
+     * @var array
+     */
+    private $services = [];
+    /**
+     * @var string
+     */
     private $cacheKey = 'services';
-
+    /**
+     * @var Configuration
+     */
     private $config;
 
+    /**
+     * @var string
+     */
     private $projectDirectory;
 
+    /**
+     * Container constructor.
+     */
     public function __construct()
     {
         $this->projectDirectory = dirname(getcwd());
@@ -38,11 +50,20 @@ class Container
         $this->setAllServices();
     }
 
+    /**
+     * Get Service
+     * @param string $serviceName
+     * @return Object
+     */
     public function get(string $serviceName)
     {
         return !empty($this->services[$serviceName]) ? $this->services[$serviceName] : null;
     }
 
+    /**
+     * Sets all services
+     * @throws IOException
+     */
     protected function setAllServices()
     {
         $dice = new Dice();
@@ -71,6 +92,10 @@ class Container
         $this->services = $services;
     }
 
+    /**
+     * Gets default services
+     * @return array
+     */
     protected function getDefaultServiceList()
     {
         $resourceRules = [
@@ -82,7 +107,7 @@ class Container
                 ]
             ]
         ];
-        $services =  [
+        $services = [
             'configuration' => [
                 'class' => Configuration::class,
                 'rules' => $resourceRules
@@ -94,7 +119,7 @@ class Container
             'memorycache' => MemoryCache::class
         ];
         $authConfig = $this->config->get('authentication');
-        if(!empty($authConfig['enabled'])) {
+        if (!empty($authConfig['enabled'])) {
             $services['auth'] = [
                 'class' => Auth::class,
                 'rules' => [
@@ -116,6 +141,10 @@ class Container
         return $services;
     }
 
+    /**
+     * Gets service list from client
+     * @return array
+     */
     protected function getClientServiceList()
     {
         return $this->config->get($this->cacheKey) ?: [];

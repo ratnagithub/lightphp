@@ -13,6 +13,10 @@ use Zend\Diactoros\ServerRequestFactory;
 
 class RequestFactory extends ServerRequestFactory
 {
+    /**
+     * Factory to get Request object from global variables
+     * @return Request
+     */
     public static function getRequest() {
         $server  = static::normalizeServer($_SERVER);
         $files   = static::normalizeFiles($_FILES);

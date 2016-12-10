@@ -14,8 +14,16 @@ use Psr\Http\Message\ResponseInterface;
 
 class ErrorHandler
 {
-    public function handleException(\Exception $e, RequestInterface $request, ResponseInterface $response) {
-        if($e instanceof \InvalidArgumentException) {
+    /**
+     * Handle Exception
+     * @param \Exception $e
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @return ResponseInterface
+     */
+    public function handleException(\Exception $e, RequestInterface $request, ResponseInterface $response)
+    {
+        if ($e instanceof \InvalidArgumentException) {
             $errors = [
                 'status' => 400,
                 'title' => 'Invalid request',
@@ -32,7 +40,16 @@ class ErrorHandler
             ->withErrors($errors);
         return $response;
     }
-    public function handleError(\Throwable $e, RequestInterface $request, ResponseInterface $response) {
+
+    /**
+     * Handles error
+     * @param \Throwable $e
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @return ResponseInterface
+     */
+    public function handleError(\Throwable $e, RequestInterface $request, ResponseInterface $response)
+    {
         $response = $response->withStatus(500)
             ->withErrors([
                 'status' => 500,
