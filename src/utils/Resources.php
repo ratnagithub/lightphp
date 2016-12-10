@@ -13,16 +13,31 @@ use LightPHP\Utils\Filesystem\Directory;
 
 class Resources
 {
+    /**
+     * @var Directory
+     */
     private $projectDirectory;
-
+    /**
+     * @var Directory
+     */
     private $appDirectory;
-
+    /**
+     * @var Directory
+     */
     private $configDirectory;
-
+    /**
+     * @var Directory
+     */
     private $controllerDirectory;
-
+    /**
+     * @var Directory
+     */
     private $vendorDirectory;
 
+    /**
+     * Resources constructor.
+     * @param Directory $projectDirectory
+     */
     public function __construct(Directory $projectDirectory)
     {
         $this->projectDirectory = $projectDirectory;
@@ -36,29 +51,48 @@ class Resources
         $this->vendorDirectory = $this->projectDirectory->cd('vendor');
     }
 
-    public function getProjectDirectory()
+    /**
+     * Get Project directory
+     * @return Directory
+     */
+    public function getProjectDirectory():Directory
     {
         return $this->projectDirectory;
     }
 
-    public function getAppDirectory()
+    /**
+     * Get App directory
+     * @return Directory
+     */
+    public function getAppDirectory():Directory
     {
         return $this->appDirectory;
     }
 
-    public function getConfigDirectory()
+    /**
+     * Get Config directory
+     * @return Directory
+     */
+    public function getConfigDirectory():Directory
     {
         return $this->configDirectory;
     }
 
-    public function getControllerDirectory()
+    /**
+     * Get Controller directory
+     * @return Directory
+     */
+    public function getControllerDirectory():Directory
     {
         return $this->controllerDirectory;
     }
 
-    public function getVendorDirectory()
+    /**
+     * Get Vendor directory
+     * @return Directory
+     */
+    public function getVendorDirectory():Directory
     {
         return $this->vendorDirectory;
     }
-
 }

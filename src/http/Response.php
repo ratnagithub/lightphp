@@ -12,23 +12,52 @@ use \Zend\Diactoros\Response as ZendResponse;
 
 class Response extends ZendResponse
 {
-    private $data;
+    /**
+     * @var array
+     */
+    private $data = [];
 
-    private $errors;
+    /**
+     * @var array
+     */
+    private $errors = [];
 
-    public function withData($data = []) {
+    /**
+     * Sets data in Response
+     * @param array $data
+     * @return Response
+     */
+    public function withData($data = []):Response
+    {
         $this->data = $data;
         return $this;
     }
-    public function getData()
+
+    /**
+     * Gets data
+     * @return array
+     */
+    public function getData() :array
     {
         return $this->data;
     }
-    public function withErrors($errors = []) {
+
+    /**
+     * Sets errors in Response
+     * @param array $errors
+     * @return Response
+     */
+    public function withErrors($errors = []):Response
+    {
         $this->errors = $errors;
         return $this;
     }
-    public function getErrors()
+
+    /**
+     * Gets Errors
+     * @return array
+     */
+    public function getErrors() :array
     {
         return $this->errors;
     }
