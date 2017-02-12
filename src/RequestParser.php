@@ -9,6 +9,7 @@
 namespace LightPHP;
 
 
+use LightPHP\Exceptions\NotFoundException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -75,7 +76,7 @@ class RequestParser
     {
         $controllerClass = $this->getControllerNamespace($controllerPath);
         if (!class_exists($controllerClass)) {
-            throw new \InvalidArgumentException('No Controller found by the name - ' . $controllerClass);
+            throw new NotFoundException('No Controller found by the name - ' . $controllerClass);
         }
         $controllerObj = new $controllerClass();
         $this->controllerObject = $controllerObj;
@@ -91,7 +92,7 @@ class RequestParser
 
         $controllerObject = $this->getControllerObject();
         if (!method_exists($controllerObject, $controllerAction)) {
-            throw new \InvalidArgumentException('No Action found by the name "' . $controllerAction . '"');
+            throw new NotFoundException('No Action found by the name "' . $controllerAction . '"');
         }
         $this->controllerAction = $controllerAction;
     }

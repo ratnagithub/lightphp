@@ -2,21 +2,22 @@
 /**
  * Created by PhpStorm.
  * User: ratnadeep
- * Date: 13/11/16
- * Time: 1:13 AM
+ * Date: 09/11/16
+ * Time: 11:13 PM
  */
 
 namespace LightPHP\Exceptions;
 
 
-class IOException extends \Exception implements LightExceptionInterface
+class NotFoundException extends \Exception implements LightExceptionInterface
 {
     public function __construct($message, $code = 0, \Exception $previous = null)
     {
-        parent::__construct($message, 400, $previous);
+        parent::__construct($message, 404, $previous);
     }
     public function getTitle()
     {
-        return 'Invalid input parameters';
+        return "Not Found";
     }
+
 }

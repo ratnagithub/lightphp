@@ -9,6 +9,7 @@
 namespace LightPHP;
 
 
+use LightPHP\Exceptions\LightExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -23,17 +24,18 @@ class ErrorHandler
      */
     public function handleException(\Exception $e, RequestInterface $request, ResponseInterface $response)
     {
-        if ($e instanceof \InvalidArgumentException) {
-            $errors = [
-                'status' => 400,
-                'title' => 'Invalid request',
-                'details' => 'Invalid URL or parameter'
-            ];
+        if ($e instanceof LightExceptionInterface)
+        {
+                $errors = [
+                    'status' => $e->getCode(),
+                    'title' => $e->getTitle(),
+                    'details' => $e->getMessage()
+                ];
         } else {
             $errors = [
-                'status' => 500,
+                'status' => $e->getCode(),
                 'title' => 'Internal Server Error',
-                'detail' => 'An internal server error occured. Please try again after some time'
+                'detail' => $e->getMessage()
             ];
         }
         $response = $response->withStatus($errors['status'])
@@ -53,8 +55,8 @@ class ErrorHandler
         $response = $response->withStatus(500)
             ->withErrors([
                 'status' => 500,
-                'title' => 'Internal Server Error',
-                'detail' => 'An internal server error occured. Please try again after some time'
+                'title' => $e->getMessage(),
+                'details' => $e->getTrace()
             ]);
         return $response;
     }
